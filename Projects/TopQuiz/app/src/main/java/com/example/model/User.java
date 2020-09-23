@@ -4,8 +4,6 @@ public class User {
 
     private String mFirstName;
 
-
-
     public String getFirstName() {
         return mFirstName;
     }

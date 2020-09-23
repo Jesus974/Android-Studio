@@ -23,7 +23,7 @@
         android:text="Question?"></TextView>
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/awnser1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -33,7 +33,7 @@
         android:text="1" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/awnser2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -43,7 +43,7 @@
         android:text="2" />
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/awnser3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -53,7 +53,7 @@
         android:text="3" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/awnser4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
