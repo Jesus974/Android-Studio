@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_view_init"
+        android:layout_marginTop="20dp"
         android:textAlignment="center" />
 
     <EditText
@@ -24,7 +25,7 @@
         android:hint="Name"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/play"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
