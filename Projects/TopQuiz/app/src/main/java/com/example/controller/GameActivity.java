@@ -1,4 +1,4 @@
-package com.example.topquiz;
+package com.example.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,26 +11,47 @@ import android.widget.Toast;
 
 import com.example.model.QuestionBank;
 import com.example.model.Question;
+import com.example.topquiz.R;
 
 import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mTextViewQuestion;
-
     private Button mAnswer1;
     private Button mAnswer2;
     private Button mAnswer3;
     private Button mAnswer4;
 
     private QuestionBank mQuestionBank;
-    private Question mQuestion;
+    private Question mCurrentQuestion;
+
+    private int mScore;
+    private int mNumberOfQuestions;
+
+    public static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE";
+    public static final String BUNDLE_STATE_SCORE = "currentScore";
+    public static final String BUNDLE_STATE_QUESTION = "currentQuestion";
+
+    private boolean mEnableTouchEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        Intent intent = getIntent();
+
+        // On appelle notre fonction de génération des questions
+        mQuestionBank = this.generateQuestions();
+
+        if (savedInstanceState != null) {
+            mScore = savedInstanceState.getInt(BUNDLE_STATE_SCORE);
+            mNumberOfQuestions = savedInstanceState.getInt(BUNDLE_STATE_QUESTION);
+        } else {
+            mScore = 0;
+            mNumberOfQuestions = 4;
+        }
+
+        mEnableTouchEvents = true;
 
         // Initialisation TextView
         mTextViewQuestion = findViewById(R.id.activity_game_question_text);
@@ -40,9 +61,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mAnswer2 = findViewById(R.id.awnser2);
         mAnswer3 = findViewById(R.id.awnser3);
         mAnswer4 = findViewById(R.id.awnser4);
-
-        // On appelle notre fonction de génération des questions
-        mQuestionBank = this.generateQuestions();
 
         mAnswer1.setOnClickListener(this);
         mAnswer2.setOnClickListener(this);
@@ -55,6 +73,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mAnswer3.setTag(2);
         mAnswer4.setTag(3);
 
+        mCurrentQuestion = mQuestionBank.getQuestion();
+        this.displayQuestion(mCurrentQuestion);
     }
 
     // Générer les questions
