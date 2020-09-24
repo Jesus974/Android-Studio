@@ -1,10 +1,13 @@
 package com.example.controller;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,25 +46,30 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         // On appelle notre fonction de génération des questions
         mQuestionBank = this.generateQuestions();
 
+        // Si on a déjà un score
         if (savedInstanceState != null) {
             mScore = savedInstanceState.getInt(BUNDLE_STATE_SCORE);
             mNumberOfQuestions = savedInstanceState.getInt(BUNDLE_STATE_QUESTION);
-        } else {
+        }
+        // Sinon les scores à 0
+        else {
             mScore = 0;
             mNumberOfQuestions = 4;
         }
 
+        // Touch Events à true
         mEnableTouchEvents = true;
 
-        // Initialisation TextView
+        // Initialisation TextView de la question
         mTextViewQuestion = findViewById(R.id.activity_game_question_text);
 
-        // Initialisation Button
+        // Initialisation Buttons
         mAnswer1 = findViewById(R.id.awnser1);
         mAnswer2 = findViewById(R.id.awnser2);
         mAnswer3 = findViewById(R.id.awnser3);
         mAnswer4 = findViewById(R.id.awnser4);
 
+        // Sur le click des Buttons
         mAnswer1.setOnClickListener(this);
         mAnswer2.setOnClickListener(this);
         mAnswer3.setOnClickListener(this);
@@ -73,8 +81,73 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mAnswer3.setTag(2);
         mAnswer4.setTag(3);
 
+        // Current Question
         mCurrentQuestion = mQuestionBank.getQuestion();
+
+        // Affiche la question
         this.displayQuestion(mCurrentQuestion);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(BUNDLE_STATE_SCORE, mScore);
+        outState.putInt(BUNDLE_STATE_QUESTION, mNumberOfQuestions);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int responseIndex = (int) v.getTag();
+
+        if (responseIndex == mCurrentQuestion.getAnswerIndex()) {
+            // Good answer
+            Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
+            mScore++;
+        } else {
+            // Wrong answer
+            Toast.makeText(this, "Wrong answer!", Toast.LENGTH_SHORT).show();
+        }
+
+        mEnableTouchEvents = false;
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mEnableTouchEvents = true;
+
+                // If this is the last question, ends the game.
+                // Else, display the next question.
+                if (--mNumberOfQuestions == 0) {
+                    // End the game
+                    endGame();
+                } else {
+                    mCurrentQuestion = mQuestionBank.getQuestion();
+                    displayQuestion(mCurrentQuestion);
+                }
+            }
+        }, 2000); // LENGTH_SHORT is usually 2 second long
+    }
+
+    // Fin du jeu + Affichage du score
+    private void endGame() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Well done!")
+                .setMessage("Your score is " + mScore)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // End the activity
+                        Intent intent = new Intent();
+                        intent.putExtra(BUNDLE_EXTRA_SCORE, mScore);
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
+                })
+                .setCancelable(false)
+                .create()
+                .show();
     }
 
     // Générer les questions
@@ -117,13 +190,43 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
-        int responseIndex = (int) v.getTag();
-        Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        System.out.println("GameActivity::onStart()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        System.out.println("GameActivity::onResume()");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        System.out.println("GameActivity::onPause()");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        System.out.println("GameActivity::onStop()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        System.out.println("GameActivity::onDestroy()");
+    }
+
 }
