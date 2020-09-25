@@ -102,11 +102,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if (responseIndex == mCurrentQuestion.getAnswerIndex()) {
             // Good answer
-            Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
             mScore++;
         } else {
             // Wrong answer
-            Toast.makeText(this, "Wrong answer!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mauvaise Réponse", Toast.LENGTH_SHORT).show();
         }
 
         mEnableTouchEvents = false;
@@ -133,8 +133,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private void endGame() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setTitle("Well done!")
-                .setMessage("Your score is " + mScore)
+        builder.setTitle("Le Quizz est terminé ")
+                .setMessage("Votre score est de " + mScore)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

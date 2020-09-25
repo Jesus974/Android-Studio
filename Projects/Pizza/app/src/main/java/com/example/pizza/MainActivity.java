@@ -22,22 +22,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-        MyListData[] myListData = new MyListData[] {
-                new MyListData("Email", android.R.drawable.ic_dialog_email),
-                new MyListData("Info", android.R.drawable.ic_dialog_info),
-                new MyListData("Delete", android.R.drawable.ic_delete),
-                new MyListData("Dialer", android.R.drawable.ic_dialog_dialer),
-                new MyListData("Alert", android.R.drawable.ic_dialog_alert),
-                new MyListData("Map", android.R.drawable.ic_dialog_map),
-                new MyListData("Email", android.R.drawable.ic_dialog_email),
-                new MyListData("Info", android.R.drawable.ic_dialog_info),
-                new MyListData("Delete", android.R.drawable.ic_delete),
-                new MyListData("Dialer", android.R.drawable.ic_dialog_dialer),
-                new MyListData("Alert", android.R.drawable.ic_dialog_alert),
-                new MyListData("Map", android.R.drawable.ic_dialog_map),
+        // Initialisation de la liste
+        MyListData[] myListData = new MyListData[]{
+                new MyListData("Margherita", R.drawable.margarita, "12€", Arrays.asList("Tomate", "Mozzarella", "Basilic", "Huile d'Olive")),
+                new MyListData("Regina ", R.drawable.regina, "13€", Arrays.asList("Tomate", "Mozzarella", "Jambon", "Champignons")),
+                new MyListData("Napolitaine", R.drawable.napolitaine, "14€", Arrays.asList("Tomate", "Mozzarella", "Anchois", "Olives Noires", "Origan", "Huile d'olive")),
+                new MyListData("Romaine ", R.drawable.romaine, "13€", Arrays.asList("Tomate", "Emmental", "Jambon")),
+                new MyListData("Quatre fromages", R.drawable.fromages, "12€", Arrays.asList("Tomate", "Emmental", "Jambon")),
+                new MyListData("Hawaïenne", R.drawable.hawai, "14€", Arrays.asList("Tomate", "Emmental", "Jambon")),
         };
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -46,11 +38,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-
-
-
         // On appelle la fonction
         createPizzas();
+
     }
 
     /*

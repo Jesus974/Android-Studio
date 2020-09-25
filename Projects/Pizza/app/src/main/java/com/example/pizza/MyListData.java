@@ -1,20 +1,26 @@
 package com.example.pizza;
 
+import java.util.List;
+
 public class MyListData {
-    private String description;
+    private String mNomPizza;
     private int imgId;
+    private String mPrixPizza;
+    private String mIngredients;
 
-    public MyListData(String description, int imgId) {
-        this.description = description;
+    public MyListData(String NomPizza, int imgId, String PrixPizza, List<String> ListIngredients) {
+        this.mNomPizza = NomPizza;
         this.imgId = imgId;
+        this.mPrixPizza = PrixPizza;
+        this.mIngredients = ListIngredients.toString();;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNomPizza() {
+        return mNomPizza;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNomPizza(String description) {
+        this.mNomPizza = description;
     }
 
     public int getImgId() {
@@ -23,5 +29,21 @@ public class MyListData {
 
     public void setImgId(int imgId) {
         this.imgId = imgId;
+    }
+
+    public String getPrixPizza() {
+        return mPrixPizza;
+    }
+
+    public void setPrixPizza(String prixPizza) {
+        mPrixPizza = prixPizza;
+    }
+
+    public String getIngredients() {
+        return mIngredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        mIngredients = ingredients;
     }
 }

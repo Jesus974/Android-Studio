@@ -1,7 +1,6 @@
 package com.example.pizza;
 
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,12 +31,14 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final MyListData myListData = listdata[position];
-        holder.textView.setText(listdata[position].getDescription());
+        holder.Tv_Nom_Pizza.setText(listdata[position].getNomPizza());
         holder.imageView.setImageResource(listdata[position].getImgId());
+        holder.Tv_Prix_Pizza.setText(listdata[position].getPrixPizza());
+        holder.Tv_Ingredients.setText(listdata[position].getIngredients());
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "click on item: " + myListData.getDescription(), Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "click on item: " + myListData.getNomPizza(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -50,13 +51,17 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
-        public TextView textView;
+        public TextView Tv_Nom_Pizza;
+        public TextView Tv_Prix_Pizza;
+        public TextView Tv_Ingredients;
         public RelativeLayout relativeLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
-            this.textView = (TextView) itemView.findViewById(R.id.textView);
+            this.Tv_Nom_Pizza = (TextView) itemView.findViewById(R.id.nom_pizza);
+            this.Tv_Prix_Pizza = (TextView) itemView.findViewById(R.id.prix_pizza);
+            this.Tv_Ingredients = (TextView) itemView.findViewById(R.id.ingredients);
             relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
         }
     }
