@@ -102,11 +102,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if (responseIndex == mCurrentQuestion.getAnswerIndex()) {
             // Good answer
-            Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,
+                    "Bonne réponse !"
+                            + "\n"
+                            + mCurrentQuestion.getExplain(),
+                    Toast.LENGTH_SHORT).show();
             mScore++;
         } else {
             // Wrong answer
-            Toast.makeText(this, "Mauvaise Réponse", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,
+                    "Mauvaise Réponse"
+                            + "\n"
+                            + "La bonne réponse est "
+                            + mCurrentQuestion.getChoiceList().get(mCurrentQuestion.getAnswerIndex())
+                            + "\n"
+                            + mCurrentQuestion.getExplain(),
+                    Toast.LENGTH_SHORT).show();
         }
 
         mEnableTouchEvents = false;
@@ -157,25 +168,46 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         "Steve Wozniak",
                         "Jake Wharton",
                         "Paul Smith"),
-                0);
+                0,
+                "Il était plus beau");
 
         Question question2 = new Question("When did the first man land on the moon?",
                 Arrays.asList("1958",
                         "1962",
                         "1967",
                         "1969"),
-                3);
+                3,
+                "C'étais Neil Armstrong");
 
         Question question3 = new Question("What is the house number of The Simpsons?",
                 Arrays.asList("42",
                         "101",
                         "666",
                         "742"),
-                3);
+                3,
+                "Et oui on peut le voir dans le générique");
+
+        Question la_question_de_romain = new Question("Qui est le premier Avengers?",
+                Arrays.asList("Iron Man",
+                        "Captain America",
+                        "Captain Marvel",
+                        "Black Widow"),
+                1,
+                "Il est né le 4 juillet 1918");
+
+        Question une_autre_pour_le_plaisir = new Question("UML est l'acronyme de :",
+                Arrays.asList("Umtiti Mbappe Lloris",
+                        "Un Macaron Léger ",
+                        "Unified Modeling Language",
+                        "Ultime Master Legend"),
+                3,
+                "UML signifie en français Langage de Modélisation Unifié");
 
         return new QuestionBank(Arrays.asList(question1,
                 question2,
-                question3));
+                question3,
+                la_question_de_romain,
+                une_autre_pour_le_plaisir));
     }
 
     // Affiche les questions

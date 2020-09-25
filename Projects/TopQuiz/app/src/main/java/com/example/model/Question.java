@@ -7,11 +7,13 @@ public class Question {
     private String mQuestion;
     private List<String> mChoiceList;
     private int mAnswerIndex;
+    private String mExplain;
 
-    public Question(String question, List<String> choiceList, int answerIndex) {
+    public Question(String question, List<String> choiceList, int answerIndex, String Explain) {
         mQuestion = question;
         mChoiceList = choiceList;
         mAnswerIndex = answerIndex;
+        mExplain = Explain;
     }
 
     public String getQuestion() {
@@ -36,5 +38,13 @@ public class Question {
 
     public void setAnswerIndex(int answerIndex) {
         mAnswerIndex = answerIndex;
+    }
+
+    public String getExplain() {
+        return mExplain;
+    }
+
+    public void setExplain(String explain) {
+        mExplain = explain;
     }
 }
